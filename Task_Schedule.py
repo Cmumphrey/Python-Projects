@@ -148,14 +148,19 @@ class App():
         if len(T.tasks.keys())==1:
             for key in T.main.keys():
                 self.connection[key]+=[bar_entry2.get()]
-            print(self.connection2)
+            #print(self.connection2)
             place_holderG1["text"]=bar_entry2.get()
             bar_entry2.delete(0,END)
             #print(T.tasks)
         else:
             T.add_task()
             for key in T.main.keys():
+                for key,val in self.connection.items():
+                    if val in self.connection.items():
+                        continue
+                    continue
                 self.connection[key]+=[bar_entry2.get()]
+                break
             #print(T.tasks)
             print(self.connection)
             Label(frame1,text=bar_entry2.get()).grid()
@@ -169,24 +174,34 @@ class App():
     def add_SubTask(self):
         T.add_subtask()
         #place_holderG2["text"]=bar_entry3.get()
-        print(self.connection2)
+        #print(self.connection2)
         if len(T.sub_task.keys())==1:
             for key in T.tasks.keys():
+                for key,val in self.connection2.items():
+                    if val in self.connection2.items():
+                        continue
+                    continue
                 self.connection2[key]+=[bar_entry3.get()]
+                break
             place_holderG2["text"]=bar_entry3.get()
             print(self.connection2)
             bar_entry3.delete(0,END)
-            print(T.sub_task)
+            #print(T.sub_task)
         else:
             T.add_subtask()
             for key in T.tasks.keys():
+                for key,val in self.connection2.items():
+                    if val in self.connection2.items():
+                        continue
+                    continue
                 self.connection2[key]+=[bar_entry3.get()]
+                break
             #print(T.sub_task)
             print(self.connection2)
             Label(frame2,text=bar_entry3.get()).grid()
             Checkbutton(frame2,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
             bar_entry3.delete(0,END)
-            print(T.sub_task)
+            #print(T.sub_task)
 
     def remove_SubTask(self):
         pass
