@@ -124,12 +124,18 @@ class App():
         #print(self.Vlist)
         if len(T.main.keys())==1:
             place_holderG["text"]=bar_entry1.get()
+            text.insert(END,"-"*len(bar_entry1.get()))
+            text.insert(END,"\n"+bar_entry1.get())
+            text.insert(END,"\n"+"-"*len(bar_entry1.get()))
             bar_entry1.delete(0,END)
         else:
 
             #self.connection.update({bar_entry1.get():[self.Vlist]})
             Label(frame,text=bar_entry1.get()).grid()
             Checkbutton(frame,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False,command=self.Test_box).grid(column=2)
+            text.insert(END,"\n"+"-"*len(bar_entry1.get()))
+            text.insert(END,"\n"+bar_entry1.get())
+            text.insert(END,"\n"+"-"*len(bar_entry1.get()))
             bar_entry1.delete(0,END)
             print(T.main)
     
@@ -150,6 +156,7 @@ class App():
                 self.connection[key]+=[bar_entry2.get()]
             #print(self.connection2)
             place_holderG1["text"]=bar_entry2.get()
+            text.insert(END,"\n+ "+bar_entry2.get())
             bar_entry2.delete(0,END)
             #print(T.tasks)
         else:
@@ -165,6 +172,7 @@ class App():
             print(self.connection)
             Label(frame1,text=bar_entry2.get()).grid()
             Checkbutton(frame1,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
+            text.insert(END,"\n+ "+bar_entry2.get())
             bar_entry2.delete(0,END)
 
 
@@ -184,6 +192,7 @@ class App():
                 self.connection2[key]+=[bar_entry3.get()]
                 break
             place_holderG2["text"]=bar_entry3.get()
+            text.insert(END,"\n-  "+bar_entry3.get())
             print(self.connection2)
             bar_entry3.delete(0,END)
             #print(T.sub_task)
@@ -200,6 +209,7 @@ class App():
             print(self.connection2)
             Label(frame2,text=bar_entry3.get()).grid()
             Checkbutton(frame2,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
+            text.insert(END,"\n-  "+bar_entry3.get())
             bar_entry3.delete(0,END)
             #print(T.sub_task)
 
@@ -230,18 +240,22 @@ root.resizable(True,True)
 var1=BooleanVar()
 var2=BooleanVar()
 var3=BooleanVar()
+
 #Frame
-frame=LabelFrame(root, text="Goals",padx=10,pady=100)
-frame1=LabelFrame(root, text="Tasks",padx=10,pady=100)
-frame2=LabelFrame(root, text="Sub-Tasks",padx=10,pady=100)
+frame=LabelFrame(root, text="Goals")
+frame1=LabelFrame(root, text="Tasks")
+frame2=LabelFrame(root, text="Sub-Tasks")
+
 #input bar
 bar_entry1=Entry(root, width=30)
 bar_entry2=Entry(root, width=30)
 bar_entry3=Entry(root, width=30)
+
 #Checkmarks
 check_test=Checkbutton(frame, text="",variable=var1,onvalue=True,offvalue=False)
 check_test1=Checkbutton(frame1, text="",variable=var2,onvalue=True,offvalue=False)
 check_test2=Checkbutton(frame2, text="",variable=var3,onvalue=True,offvalue=False)
+
 #buttons
 add_goal=Button(root, text="Add",command=A.add_Goal)
 Del=Button(root,text="Del")
@@ -251,21 +265,24 @@ add_subtask=Button(root, text="Add",command=A.add_SubTask)
 Del2=Button(root, text="Del")
 save_button=Button(root, text="Save")
 quit_button=Button(root, text="Exit",command=root.destroy)
+
 #labels
 place_holderG=Label(frame, text="No goals right now")
 place_holderG1=Label(frame1, text="No tasks right now")
 place_holderG2=Label(frame2, text="No sub-tasks right now")
+
 #Scrollbar
-text=Text(root, height=8)
+text=Text(root, height=8,width=35 )
 text.grid(sticky="ew",row=0,column=8)
 scroll=Scrollbar(root, orient="vertical", command=text.yview)
 scroll.grid(row=0, column=0, sticky="ns")
 text["yscrollcommand"]=scroll.set
-text.insert(END,"Hello World")
+
 #Shove on screen
 bar_entry1.grid(row=1,column=5,ipadx=1,ipady=1)
 bar_entry2.grid(row=2,column=5,ipadx=1,ipady=1)
 bar_entry3.grid(row=3,column=5,ipadx=1,ipady=1)
+
 #frames_show
 frame.grid(column=1,row=1)
 frame1.grid(column=1,row=2)
@@ -273,6 +290,7 @@ frame2.grid(column=1,row=3)
 place_holderG.grid()
 place_holderG1.grid()
 place_holderG2.grid()
+
 #buttons_show
 add_goal.grid(row=1,column=6)
 Del.grid(row=1,column=7)
@@ -282,6 +300,7 @@ add_subtask.grid(row=3,column=6)
 Del2.grid(row=3,column=7)
 save_button.grid(row=10,column=9)
 quit_button.grid(row=10, column=10)
+
 #checkmark_show
 check_test.grid(row=2,column=2)
 check_test1.grid(row=2,column=2)

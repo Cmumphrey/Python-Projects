@@ -1,5 +1,4 @@
-from tkinter import END, Tk
-from tkinter import ttk
+from tkinter import END, Tk, ttk
 import tkinter
 
 class App1():
