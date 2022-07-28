@@ -132,7 +132,7 @@ class App():
 
             #self.connection.update({bar_entry1.get():[self.Vlist]})
             Label(frame,text=bar_entry1.get()).grid()
-            Checkbutton(frame,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False,command=self.Test_box).grid(column=2)
+            Checkbutton(frame,text="Test",variable=checkmark1,onvalue=True,offvalue=False,command=self.Test_box).grid(column=2)
             text.insert(END,"\n"+"-"*len(bar_entry1.get()))
             text.insert(END,"\n"+bar_entry1.get())
             text.insert(END,"\n"+"-"*len(bar_entry1.get()))
@@ -209,7 +209,7 @@ class App():
             print(self.connection2)
             Label(frame2,text=bar_entry3.get()).grid()
             Checkbutton(frame2,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
-            text.insert(END,"\n-  "+bar_entry3.get())
+            text.insert(END,"\n==>"+bar_entry3.get())
             bar_entry3.delete(0,END)
             #print(T.sub_task)
 
