@@ -192,7 +192,7 @@ class App():
                 self.connection2[key]+=[bar_entry3.get()]
                 break
             place_holderG2["text"]=bar_entry3.get()
-            text.insert(END,"\n-  "+bar_entry3.get())
+            text.insert(END,"\n==>"+bar_entry3.get())
             print(self.connection2)
             bar_entry3.delete(0,END)
             #print(T.sub_task)
