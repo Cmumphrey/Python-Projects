@@ -1,10 +1,12 @@
 
 
+
 from tkinter import *
-from tkinter import colorchooser
 from tkinter import messagebox
-from tkinter import ttk
-import PIL
+
+
+
+
 
 class Task_Scheduler():
 
@@ -68,6 +70,10 @@ class Task_Scheduler():
         self.main.clear()
         pass
 
+    def remove_goal(self):
+        self.main.popitem()
+        pass
+
     def add_task(self):
         """Add task to task dict"""
         self.tasks.update({bar_entry2.get():False})
@@ -105,17 +111,20 @@ T=Task_Scheduler()
 
 
 
+
 class App():
     def __init__(self):
         """Makes connections with Goals,Tasks and Sub-tasks"""
         self.connection={}
-        #self.Vlist=[]
+        self.goalL=[]
         self.connection2={}
-        #self.Vlist2=[]
+        self.taskL=[]
+        self.sub_taskL=[]
 
     def add_Goal(self):
         T.add_goal()
         self.connection.update({bar_entry1.get():[]})
+        self.goalL.append(bar_entry1.get())
         #for key in T.main.keys():
         #    for value in T.tasks.keys():
         #        self.connection.update({key})
@@ -129,21 +138,38 @@ class App():
             text.insert(END,"\n"+"-"*len(bar_entry1.get()))
             bar_entry1.delete(0,END)
         else:
-
+            
             #self.connection.update({bar_entry1.get():[self.Vlist]})
             Label(frame,text=bar_entry1.get()).grid()
-            Checkbutton(frame,text="Test",variable=checkmark1,onvalue=True,offvalue=False,command=self.Test_box).grid(column=2)
+            
+            #Checkbutton(frame,text="Test",variable=check[i-1],onvalue=True,offvalue=False,command=self.Test_box).grid(column=2)
             text.insert(END,"\n"+"-"*len(bar_entry1.get()))
             text.insert(END,"\n"+bar_entry1.get())
             text.insert(END,"\n"+"-"*len(bar_entry1.get()))
             bar_entry1.delete(0,END)
+            #text.delete("1.0","end")
             print(T.main)
     
-    def Test_box(self):
-        if checkmark1.get()==False:
-            print("Box unchecked")
-        else:
-            print("Box checked")
+    #def items_selected(event):
+#
+    #    selected_indices = listbox1.curselection()
+    #    selected_langs = ",".join([listbox1.get(i) for i in selected_indices])
+    #    msg = f'You selected: {selected_langs}'
+#
+    #    messagebox.showinfo(
+    #    title='Information',
+    #    message=msg)
+
+   # def Test_box(self):
+   #     for but in check:
+   #         if but.get()==False:
+   #             print("Box unchecked")
+   #             print(check)
+   #             break
+   #         else:
+   #             print("Box checked")
+#
+   #             break
             
     def remove_Goal(self):
         pass
@@ -151,6 +177,7 @@ class App():
     def add_Task(self):
         T.add_task()
         self.connection2.update({bar_entry2.get():[]})
+        self.taskL.append(bar_entry2.get())
         if len(T.tasks.keys())==1:
             for key in T.main.keys():
                 self.connection[key]+=[bar_entry2.get()]
@@ -171,7 +198,7 @@ class App():
             #print(T.tasks)
             print(self.connection)
             Label(frame1,text=bar_entry2.get()).grid()
-            Checkbutton(frame1,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
+            #Checkbutton(frame1,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
             text.insert(END,"\n+ "+bar_entry2.get())
             bar_entry2.delete(0,END)
 
@@ -181,6 +208,7 @@ class App():
 
     def add_SubTask(self):
         T.add_subtask()
+        self.sub_taskL.append(bar_entry3.get())
         #place_holderG2["text"]=bar_entry3.get()
         #print(self.connection2)
         if len(T.sub_task.keys())==1:
@@ -208,7 +236,7 @@ class App():
             #print(T.sub_task)
             print(self.connection2)
             Label(frame2,text=bar_entry3.get()).grid()
-            Checkbutton(frame2,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
+            #Checkbutton(frame2,text="Test",variable=BooleanVar(),onvalue=True,offvalue=False).grid(column=2)
             text.insert(END,"\n==>"+bar_entry3.get())
             bar_entry3.delete(0,END)
             #print(T.sub_task)
@@ -227,6 +255,7 @@ class App():
 
     def Pick_Color(self):
         pass
+    
 
 
 A=App()
@@ -245,7 +274,82 @@ var3=BooleanVar()
 frame=LabelFrame(root, text="Goals")
 frame1=LabelFrame(root, text="Tasks")
 frame2=LabelFrame(root, text="Sub-Tasks")
+#canvas/listbox 1
+def New_window():
 
+    def items_selected(event):
+
+        selected_indices = listbox1.curselection()
+        selected_langs = ",".join([listbox1.get(i) for i in selected_indices])
+        msg = f'You completed: {selected_langs}'
+
+        messagebox.showinfo(
+        title='Information',
+        message=msg)
+        if selected_langs in A.goalL:
+            print(selected_langs)
+            T.main.update({selected_langs:True})
+            print(T.main)
+            idx=listbox1.get(0,END).index(selected_langs)
+            listbox1.delete(idx)
+    Window=Toplevel()
+    ca=Canvas(Window,height=8,width=8)
+    ca.grid()
+    goalLv=StringVar(value=A.goalL)
+    listbox1=Listbox(Window, listvariable=goalLv,height=6,selectmode="EXTENDED")
+    listbox1.grid(column=5,row=0,sticky="nwes")
+    listbox1.bind('<<ListboxSelect>>', items_selected)
+    print(A.goalL)
+#canvas/listbox2
+def New_window1():
+
+    def items_selected1(event):
+
+        selected_indices = listbox2.curselection()
+        selected_langs = ",".join([listbox2.get(i) for i in selected_indices])
+        msg = f'You completed: {selected_langs}'
+
+        messagebox.showinfo(
+        title='Information',
+        message=msg)
+        if selected_langs in A.taskL:
+            print(selected_langs)
+            T.tasks.update({selected_langs:True})
+            print(T.tasks)
+            idx=listbox2.get(0,END).index(selected_langs)
+            listbox2.delete(idx)
+    Window1=Toplevel()
+    ca=Canvas(Window1,height=8,width=8)
+    ca.grid()
+    taskL=StringVar(value=A.taskL)
+    listbox2=Listbox(Window1, listvariable=taskL,height=6,selectmode="EXTENDED")
+    listbox2.grid(column=5,row=0,sticky="nwes")
+    listbox2.bind('<<ListboxSelect>>', items_selected1)
+    print(A.taskL)
+def New_window2():
+
+    def items_selected2(event):
+
+        selected_indices = listbox3.curselection()
+        selected_langs = ",".join([listbox3.get(i) for i in selected_indices])
+        msg = f'You completed: {selected_langs}'
+
+        messagebox.showinfo(
+        title='Information',
+        message=msg)
+        if selected_langs in A.sub_taskL:
+            print(selected_langs)
+            T.sub_task.update({selected_langs:True})
+            print(T.sub_task)
+            idx=listbox3.get(0,END).index(selected_langs)
+            listbox3.delete(idx)
+    Window2=Toplevel()
+    ca=Canvas(Window2,height=8,width=8)
+    ca.grid()
+    subtask=StringVar(value=A.sub_taskL)
+    listbox3=Listbox(Window2, listvariable=subtask,height=6,selectmode="EXTENDED")
+    listbox3.grid(column=5,row=0,sticky="nwes")
+    listbox3.bind('<<ListboxSelect>>', items_selected2)
 #input bar
 bar_entry1=Entry(root, width=30)
 bar_entry2=Entry(root, width=30)
@@ -255,8 +359,15 @@ bar_entry3=Entry(root, width=30)
 check_test=Checkbutton(frame, text="",variable=var1,onvalue=True,offvalue=False)
 check_test1=Checkbutton(frame1, text="",variable=var2,onvalue=True,offvalue=False)
 check_test2=Checkbutton(frame2, text="",variable=var3,onvalue=True,offvalue=False)
+#listboxes
 
+
+#goalLv=StringVar(value=A.goalL)
+#listbox1=Listbox(root, listvariable=goalLv,height=6,selectmode="extended")
+#listbox1.grid(column=5,row=0,sticky="nwes")
+#listbox1.bind('<<ListboxSelect>>', A.items_selected())
 #buttons
+
 add_goal=Button(root, text="Add",command=A.add_Goal)
 Del=Button(root,text="Del")
 add_task=Button(root, text="Add",command=A.add_Task)
@@ -265,6 +376,10 @@ add_subtask=Button(root, text="Add",command=A.add_SubTask)
 Del2=Button(root, text="Del")
 save_button=Button(root, text="Save")
 quit_button=Button(root, text="Exit",command=root.destroy)
+#Buttons for listboxes
+Goal_complete=Button(root,text="Goals",command=lambda: New_window()).grid(row=0,column=6)
+task_complete=Button(root,text="Tasks",command=lambda: New_window1()).grid(row=0,column=7)
+sub_task_complete=Button(root,text="S_Tasks",command=lambda: New_window2()).grid(row=0,column=8)
 
 #labels
 place_holderG=Label(frame, text="No goals right now")
@@ -273,7 +388,7 @@ place_holderG2=Label(frame2, text="No sub-tasks right now")
 
 #Scrollbar
 text=Text(root, height=8,width=35 )
-text.grid(sticky="ew",row=0,column=8)
+text.grid(sticky="ew",row=0,column=9)
 scroll=Scrollbar(root, orient="vertical", command=text.yview)
 scroll.grid(row=0, column=0, sticky="ns")
 text["yscrollcommand"]=scroll.set
@@ -298,13 +413,13 @@ add_task.grid(row=2,column=6)
 Del1.grid(row=2,column=7)
 add_subtask.grid(row=3,column=6)
 Del2.grid(row=3,column=7)
-save_button.grid(row=10,column=9)
-quit_button.grid(row=10, column=10)
+save_button.grid(row=10,column=11)
+quit_button.grid(row=10, column=12)
 
 #checkmark_show
-check_test.grid(row=2,column=2)
-check_test1.grid(row=2,column=2)
-check_test2.grid(row=2,column=2)
+#check_test.grid(row=2,column=2)
+#check_test1.grid(row=2,column=2)
+#check_test2.grid(row=2,column=2)
 
 #Intiate App
 root.mainloop()
