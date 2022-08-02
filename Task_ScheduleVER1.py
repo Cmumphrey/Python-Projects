@@ -3,6 +3,7 @@
 
 from tkinter import *
 from tkinter import messagebox
+from os_text import output
 
 
 
@@ -292,6 +293,7 @@ def New_window():
             print(T.main)
             idx=listbox1.get(0,END).index(selected_langs)
             listbox1.delete(idx)
+            
     Window=Toplevel()
     ca=Canvas(Window,height=8,width=8)
     ca.grid()
@@ -299,7 +301,7 @@ def New_window():
     listbox1=Listbox(Window, listvariable=goalLv,height=6,selectmode="EXTENDED")
     listbox1.grid(column=5,row=0,sticky="nwes")
     listbox1.bind('<<ListboxSelect>>', items_selected)
-    print(A.goalL)
+    #output(text.get(1.0,END))
 #canvas/listbox2
 def New_window1():
 
@@ -350,6 +352,9 @@ def New_window2():
     listbox3=Listbox(Window2, listvariable=subtask,height=6,selectmode="EXTENDED")
     listbox3.grid(column=5,row=0,sticky="nwes")
     listbox3.bind('<<ListboxSelect>>', items_selected2)
+
+def saveB():
+    output(text.get(1.0,END))
 #input bar
 bar_entry1=Entry(root, width=30)
 bar_entry2=Entry(root, width=30)
@@ -366,6 +371,15 @@ check_test2=Checkbutton(frame2, text="",variable=var3,onvalue=True,offvalue=Fals
 #listbox1=Listbox(root, listvariable=goalLv,height=6,selectmode="extended")
 #listbox1.grid(column=5,row=0,sticky="nwes")
 #listbox1.bind('<<ListboxSelect>>', A.items_selected())
+
+#Scrollbar
+text=Text(root, height=8,width=35 )
+#text.config(state="disabled")
+text.grid(sticky="ew",row=0,column=9)
+scroll=Scrollbar(root, orient="vertical", command=text.yview)
+scroll.grid(row=0, column=0, sticky="ns")
+text["yscrollcommand"]=scroll.set
+
 #buttons
 
 add_goal=Button(root, text="Add",command=A.add_Goal)
@@ -374,7 +388,7 @@ add_task=Button(root, text="Add",command=A.add_Task)
 Del1=Button(root, text="Del")
 add_subtask=Button(root, text="Add",command=A.add_SubTask)
 Del2=Button(root, text="Del")
-save_button=Button(root, text="Save")
+save_button=Button(root, text="Save",command=saveB)
 quit_button=Button(root, text="Exit",command=root.destroy)
 #Buttons for listboxes
 Goal_complete=Button(root,text="Goals",command=lambda: New_window()).grid(row=0,column=6)
@@ -386,12 +400,7 @@ place_holderG=Label(frame, text="No goals right now")
 place_holderG1=Label(frame1, text="No tasks right now")
 place_holderG2=Label(frame2, text="No sub-tasks right now")
 
-#Scrollbar
-text=Text(root, height=8,width=35 )
-text.grid(sticky="ew",row=0,column=9)
-scroll=Scrollbar(root, orient="vertical", command=text.yview)
-scroll.grid(row=0, column=0, sticky="ns")
-text["yscrollcommand"]=scroll.set
+
 
 #Shove on screen
 bar_entry1.grid(row=1,column=5,ipadx=1,ipady=1)
