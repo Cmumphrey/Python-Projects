@@ -3,7 +3,7 @@
 import os
 
 def output(text):
-    with open("Task_list.txt","r+") as file:
+    with open("Task_list.txt","w+") as file:
         file.truncate(0)
         file.close()
     Task=os.open("Task_List.txt",os.O_RDWR|os.O_CREAT)

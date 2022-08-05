@@ -1,10 +1,7 @@
 
 
-
-from ast import Load
-from tkinter import *
-from tkinter import messagebox
-from os_text import *
+from tkinter import Label,Tk,Entry,Button,Canvas,Scrollbar,Listbox,Checkbutton,messagebox,Toplevel,StringVar,BooleanVar,LabelFrame,Text,END
+from os_text import remove,output,load
 
 
 
