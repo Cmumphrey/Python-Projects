@@ -310,19 +310,21 @@ def New_window1():
 
     def items_selected1(event):
 
-        selected_indices = listbox2.curselection()
-        selected_langs = ",".join([listbox2.get(i) for i in selected_indices])
-        msg = f'You completed: {selected_langs}'
+        selected_i = listbox2.curselection()
+        selected_task = ",".join([listbox2.get(i) for i in selected_i])
+        msg = f'You completed: {selected_task}'
 
         messagebox.showinfo(
         title='Information',
         message=msg)
-        if selected_langs in A.taskL:
-            print(selected_langs)
-            T.tasks.update({selected_langs:True})
+        if selected_task in A.taskL:
+            print(selected_task)
+            T.tasks.update({selected_task:True})
             print(T.tasks)
-            idx=listbox2.get(0,END).index(selected_langs)
+            idx=listbox2.get(0,END).index(selected_task)
             listbox2.delete(idx)
+            wip=text.get(1.0,END)
+            remove(wip,selected_task)
     Window1=Toplevel()
     ca=Canvas(Window1,height=8,width=8)
     ca.grid()
@@ -330,24 +332,27 @@ def New_window1():
     listbox2=Listbox(Window1, listvariable=taskL,height=6,selectmode="EXTENDED")
     listbox2.grid(column=5,row=0,sticky="nwes")
     listbox2.bind('<<ListboxSelect>>', items_selected1)
-    print(A.taskL)
+    #print(A.taskL)
+    
 def New_window2():
 
     def items_selected2(event):
 
-        selected_indices = listbox3.curselection()
-        selected_langs = ",".join([listbox3.get(i) for i in selected_indices])
-        msg = f'You completed: {selected_langs}'
+        selected_i = listbox3.curselection()
+        selected_subtask = ",".join([listbox3.get(i) for i in selected_i])
+        msg = f'You completed: {selected_subtask}'
 
         messagebox.showinfo(
         title='Information',
         message=msg)
-        if selected_langs in A.sub_taskL:
-            print(selected_langs)
-            T.sub_task.update({selected_langs:True})
+        if selected_subtask in A.sub_taskL:
+            print(selected_subtask)
+            T.sub_task.update({selected_subtask:True})
             print(T.sub_task)
-            idx=listbox3.get(0,END).index(selected_langs)
+            idx=listbox3.get(0,END).index(selected_subtask)
             listbox3.delete(idx)
+            wip=text.get(1.0,END)
+            remove(wip,selected_subtask)
     Window2=Toplevel()
     ca=Canvas(Window2,height=8,width=8)
     ca.grid()
