@@ -1,9 +1,10 @@
 
 
 
+from ast import Load
 from tkinter import *
 from tkinter import messagebox
-from os_text import output
+from os_text import *
 
 
 
@@ -280,19 +281,21 @@ def New_window():
 
     def items_selected(event):
 
-        selected_indices = listbox1.curselection()
-        selected_langs = ",".join([listbox1.get(i) for i in selected_indices])
-        msg = f'You completed: {selected_langs}'
+        selected_i = listbox1.curselection()
+        selected_goal = ",".join([listbox1.get(i) for i in selected_i])
+        msg = f'You completed: {selected_goal}'
 
         messagebox.showinfo(
         title='Information',
         message=msg)
-        if selected_langs in A.goalL:
-            print(selected_langs)
-            T.main.update({selected_langs:True})
-            print(T.main)
-            idx=listbox1.get(0,END).index(selected_langs)
+        if selected_goal in A.goalL:
+            #print(selected_langs)
+            T.main.update({selected_goal:True})
+            #print(T.main)
+            idx=listbox1.get(0,END).index(selected_goal)
             listbox1.delete(idx)
+            wip=text.get(1.0,END)
+            remove(wip,selected_goal)
             
     Window=Toplevel()
     ca=Canvas(Window,height=8,width=8)
@@ -355,6 +358,9 @@ def New_window2():
 
 def saveB():
     output(text.get(1.0,END))
+
+def LoadB():
+    remove(text.get(1.0,END))
 #input bar
 bar_entry1=Entry(root, width=30)
 bar_entry2=Entry(root, width=30)
@@ -389,6 +395,7 @@ Del1=Button(root, text="Del")
 add_subtask=Button(root, text="Add",command=A.add_SubTask)
 Del2=Button(root, text="Del")
 save_button=Button(root, text="Save",command=saveB)
+load_button=Button(root,text="LOAD",command=LoadB).grid(row=10,column=10)
 quit_button=Button(root, text="Exit",command=root.destroy)
 #Buttons for listboxes
 Goal_complete=Button(root,text="Goals",command=lambda: New_window()).grid(row=0,column=6)
