@@ -3,6 +3,9 @@
 import os
 
 def output(text):
+    with open("Task_list.txt","r+") as file:
+        file.truncate(0)
+        file.close()
     Task=os.open("Task_List.txt",os.O_RDWR|os.O_CREAT)
     line=str.encode(text)
     os.write(Task,line)
@@ -10,7 +13,10 @@ def output(text):
     print("Closed file successfully")
 
 def load():
-    pass
+    with open("Task_list.txt","r") as file:
+        a=file.read()
+        return a
+
 
 def remove(text,select):
     #os.remove("Task_list.txt")

@@ -365,7 +365,9 @@ def saveB():
     output(text.get(1.0,END))
 
 def LoadB():
-    remove(text.get(1.0,END))
+    a=load()
+    text.insert("1.0",a)
+    #text.insert(a)
 #input bar
 bar_entry1=Entry(root, width=30)
 bar_entry2=Entry(root, width=30)
