@@ -149,26 +149,7 @@ class App():
             #text.delete("1.0","end")
             print(T.main)
     
-    #def items_selected(event):
-#
-    #    selected_indices = listbox1.curselection()
-    #    selected_langs = ",".join([listbox1.get(i) for i in selected_indices])
-    #    msg = f'You selected: {selected_langs}'
-#
-    #    messagebox.showinfo(
-    #    title='Information',
-    #    message=msg)
 
-   # def Test_box(self):
-   #     for but in check:
-   #         if but.get()==False:
-   #             print("Box unchecked")
-   #             print(check)
-   #             break
-   #         else:
-   #             print("Box checked")
-#
-   #             break
             
     def remove_Goal(self):
         pass
