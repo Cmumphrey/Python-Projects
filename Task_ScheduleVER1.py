@@ -344,7 +344,7 @@ def saveB():
 
 def LoadB():
     a=load()
-    text.insert("1.0",a)
+    text.insert(END,a)
     #text.insert(a)
 #input bar
 bar_entry1=Entry(root, width=30)

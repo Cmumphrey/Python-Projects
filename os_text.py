@@ -15,6 +15,7 @@ def output(text):
 def load():
     with open("Task_list.txt","r") as file:
         a=file.read()
+        print("Loading successful")
         return a
 
 
