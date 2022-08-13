@@ -364,7 +364,7 @@ check_test2=Checkbutton(frame2, text="",variable=var3,onvalue=True,offvalue=Fals
 #listbox1.bind('<<ListboxSelect>>', A.items_selected())
 
 #Scrollbar
-text=Text(root, height=8,width=35 )
+text=Text(root, height=8,width=35,bg="cyan" )
 #text.config(state="disabled")
 text.grid(sticky="ew",row=0,column=9)
 scroll=Scrollbar(root, orient="vertical", command=text.yview)
@@ -374,11 +374,11 @@ text["yscrollcommand"]=scroll.set
 #buttons
 
 add_goal=Button(root, text="Add",command=A.add_Goal)
-Del=Button(root,text="Del")
+#Del=Button(root,text="Del")
 add_task=Button(root, text="Add",command=A.add_Task)
-Del1=Button(root, text="Del")
+#Del1=Button(root, text="Del")
 add_subtask=Button(root, text="Add",command=A.add_SubTask)
-Del2=Button(root, text="Del")
+#Del2=Button(root, text="Del")
 save_button=Button(root, text="Save",command=saveB)
 load_button=Button(root,text="LOAD",command=LoadB).grid(row=10,column=10)
 quit_button=Button(root, text="Exit",command=root.destroy)
@@ -409,11 +409,11 @@ place_holderG2.grid()
 
 #buttons_show
 add_goal.grid(row=1,column=6)
-Del.grid(row=1,column=7)
+#Del.grid(row=1,column=7)
 add_task.grid(row=2,column=6)
-Del1.grid(row=2,column=7)
+#Del1.grid(row=2,column=7)
 add_subtask.grid(row=3,column=6)
-Del2.grid(row=3,column=7)
+#Del2.grid(row=3,column=7)
 save_button.grid(row=10,column=11)
 quit_button.grid(row=10, column=12)
 
